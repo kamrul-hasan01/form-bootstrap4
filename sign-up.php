@@ -1,3 +1,38 @@
+<?php
+
+include("connection.php");
+
+
+
+if(isset($_POST['create'])){
+    
+    $fname= $_POST['fname'];
+    $sname= $_POST['sname'];
+    $email= $_POST['email'];
+    $password= $_POST['password'];
+    $day= $_POST['day'];
+    $month= $_POST['month'];
+    $year= $_POST['year'];
+    $gender= $_POST['gender'];
+    $opinion= $_POST['opinion'];
+    $optional= $_POST['optional'];
+
+    $sql ="INSERT INTO user (fname,sname,email, password,day,month,year,gender,opinion,optional) VALUES ('$fname','$sname','$email','$password','$day','$month','$year','$gender','$opinion','$optional')";
+     mysqli_query($conn,$sql);
+
+    // echo  $fname ;echo "<br>";
+    // echo $sname;echo "<br>";
+    // echo $email;echo "<br>";
+    // echo $password;echo "<br>";
+    // echo $day;echo "<br>";
+    // echo $month;echo "<br>";
+    // echo $year;echo "<br>";
+    // echo $gender;echo "<br>";
+    // echo $opinion;echo "<br>";
+    // echo $optional;
+    
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,76 +43,52 @@
     <title>Sign up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+.butt {
+  background-color: yellow;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
 </head>
 
-<body class="bg-light">
-    <div class="container mt-5">
-        <div class="row mt-5">
-            <div class="col-lg-6  d-flex justify-content-center align-items-center">
-                <div class="container">
-                    <div class=" ">
-                        <h1 class="text-primary display-3"> facebook</h1>
-                        <h4>Facebook helps you connect and share with the people in your life.</h4>
-                    </div>
+<body class="container w-75 bg-light my-3 ">
+
+    <div class="container bg-white w-50 my-lg-3">
+
+        <head>
+            <div class="d-flex py-2">
+                <div>
+                    <h1 class="font-weight-bold">Sign Up</h1>
+                    <p class="font-weight-light">It's quick and easy. </p>
+
+                </div>
+                <div class=" ml-auto ">
+              
+                    
+                    <a href="delete.php"><button class="butt">Back to Data set</button></a>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="mx-auto col-lg-8">
-                        <div class="rounded py-3 bg-white px-2">
-                            <form class="bg-white">
-                                <div class="form-group border-0">
-
-                                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" placeholder="Enter email">
-
-                                </div>
-                                <div class="form-group">
-
-                                    <input type="password" class="form-control form-control-lg"
-                                        id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                                <div class="text-center ">
-
-                                    <button type="submit"
-                                        class="btn btn-primary  px-5 py-2 font-weight-bold  w-75">Submit</button>
-                                    <a href="">
-                                        <p class="py-3 text-success">Forgotten password ?</p>
-                                    </a>
-                                    <hr class="w-100">
-                                    <button type="submit" class="btn btn-success py-2  w-50" data-toggle="modal"
-                                        data-target="#exampleModalCenter">Create a
-                                        account</button>
-
-
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-
-                                                    <h1 class="modal-title" id="exampleModalLongTitle"
-                                                        class="font-weight-bold">Sign Up</h1>
-
-
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
+        </head>
+        <section class=" pb-3">
+        <form action ="" method = "POST">
                                                         <div class="row">
                                                             <div class="col">
                                                                 <input type="text" class="form-control"
-                                                                    placeholder="First name" id="name" required>
+                                                                    placeholder="First name" id="name" name="fname" required>
                                                                 <p id="n_error" class="text-left"></p>
 
                                                             </div>
                                                             <div class="col">
-                                                                <input type="text" id="sname" class="form-control"
+                                                                <input type="text" id="sname" name="sname" class="form-control"
                                                                     placeholder="Surname" required>
                                                                 <p id="s_error" class="text-left"></p>
                                                             </div>
@@ -85,13 +96,13 @@
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1"></label>
                                                             <input type="text" class="form-control" id="email"
-                                                                aria-describedby="emailHelp"
+                                                                aria-describedby="emailHelp" name="email"
                                                                 placeholder="Enter email address" required>
                                                             <p id="e_error" class="text-left"></p>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword1"></label>
-                                                            <input type="text" class="form-control" id="password"
+                                                            <input name="password" type="text" class="form-control" id="password"
                                                                 placeholder="New password" required>
 
                                                             <p id="error" class="text-left"></p>
@@ -107,85 +118,85 @@
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-4">
 
-                                                                    <select id="day" class="form-control" required>
+                                                                    <select id="day" name="day"  class="form-control" required>
                                                                         <option selected value="">Day</option>
 
-                                                                        <option value="1">1</option>
-                                                                        <option value="2">2</option>
-                                                                        <option value="3">3</option>
-                                                                        <option value="4">4</option>
-                                                                        <option value="5">5</option>
-                                                                        <option value="6">6</option>
-                                                                        <option value="7">7</option>
-                                                                        <option value="8">8</option>
-                                                                        <option value="9">9</option>
-                                                                        <option value="10">10</option>
-                                                                        <option value="11">11</option>
-                                                                        <option value="12">12</option>
-                                                                        <option value="13">13</option>
-                                                                        <option value="14">14</option>
-                                                                        <option value="15">15</option>
-                                                                        <option value="16">16</option>
-                                                                        <option value="17">17</option>
-                                                                        <option value="18">18</option>
-                                                                        <option value="19">19</option>
-                                                                        <option value="20">20</option>
-                                                                        <option value="21">21</option>
-                                                                        <option value="22">22</option>
-                                                                        <option value="23">23</option>
-                                                                        <option value="24">24</option>
-                                                                        <option value="25">25</option>
-                                                                        <option value="26">26</option>
-                                                                        <option value="27">27</option>
-                                                                        <option value="28">28</option>
-                                                                        <option value="29">29</option>
-                                                                        <option value="30">30</option>
-                                                                        <option value="31">31</option>
+                                                                        <option name="day" value="1">1</option>
+                                                                        <option name="day" value="2">2</option>
+                                                                        <option name="day" value="3">3</option>
+                                                                        <option name="day" value="4">4</option>
+                                                                        <option name="day" value="5">5</option>
+                                                                        <option name="day" value="6">6</option>
+                                                                        <option name="day" value="7">7</option>
+                                                                        <option name="day" value="8">8</option>
+                                                                        <option name="day" value="9">9</option>
+                                                                        <option name="day" value="10">10</option>
+                                                                        <option name="day" value="11">11</option>
+                                                                        <option name="day" value="12">12</option>
+                                                                        <option name="day" value="13">13</option>
+                                                                        <option name="day" value="14">14</option>
+                                                                        <option name="day" value="15">15</option>
+                                                                        <option name="day" value="16">16</option>
+                                                                        <option name="day" value="17">17</option>
+                                                                        <option name="day" value="18">18</option>
+                                                                        <option name="day" value="19">19</option>
+                                                                        <option name="day" value="20">20</option>
+                                                                        <option name="day" value="21">21</option>
+                                                                        <option name="day" value="22">22</option>
+                                                                        <option name="day" value="23">23</option>
+                                                                        <option name="day" value="24">24</option>
+                                                                        <option name="day" value="25">25</option>
+                                                                        <option name="day" value="26">26</option>
+                                                                        <option name="day" value="27">27</option>
+                                                                        <option name="day" value="28">28</option>
+                                                                        <option name="day" value="29">29</option>
+                                                                        <option name="day" value="30">30</option>
+                                                                        <option name="day" value="31">31</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group col-md-4">
 
-                                                                    <select id="month" class="form-control" required>
+                                                                    <select id="month" name="month" class="form-control" required>
                                                                         <option selected value="">Month</option>
-                                                                        <option value="1">Jan</option>
-                                                                        <option value="2">Feb</option>
-                                                                        <option value="3">Mar</option>
-                                                                        <option value="4">Apr</option>
-                                                                        <option value="5">May</option>
-                                                                        <option value="6">Jun</option>
-                                                                        <option value="7">Jul</option>
-                                                                        <option value="8">Aug</option>
-                                                                        <option value="9">Sep</option>
-                                                                        <option value="10">Oct</option>
-                                                                        <option value="11">Nov</option>
-                                                                        <option value="12">Dec</option>
+                                                                        <option name="month" value="1">Jan</option>
+                                                                        <option name="month" value="2">Feb</option>
+                                                                        <option name="month" value="3">Mar</option>
+                                                                        <option name="month" value="4">Apr</option>
+                                                                        <option name="month" value="5">May</option>
+                                                                        <option name="month" value="6">Jun</option>
+                                                                        <option name="month" value="7">Jul</option>
+                                                                        <option name="month" value="8">Aug</option>
+                                                                        <option name="month" value="9">Sep</option>
+                                                                        <option name="month" value="10">Oct</option>
+                                                                        <option name="month" value="11">Nov</option>
+                                                                        <option name="month" value="12">Dec</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group col-md-4">
-                                                                    <select id="year" class="form-control" required>
+                                                                    <select id="year" name="year" class="form-control" required>
                                                                         <option selected value="">Year</option>
-                                                                        <option value="2021">2021</option>
-                                                                        <option value="2020">2020</option>
-                                                                        <option value="2019">2019</option>
-                                                                        <option value="2018">2018</option>
-                                                                        <option value="2017">2017</option>
-                                                                        <option value="2016">2016</option>
-                                                                        <option value="2015">2015</option>
-                                                                        <option value="2014">2014</option>
-                                                                        <option value="2013">2013</option>
-                                                                        <option value="2012">2012</option>
-                                                                        <option value="2011">2011</option>
-                                                                        <option value="2010">2010</option>
-                                                                        <option value="2009">2009</option>
-                                                                        <option value="2008">2008</option>
-                                                                        <option value="2007">2007</option>
-                                                                        <option value="2006">2006</option>
-                                                                        <option value="2005">2005</option>
-                                                                        <option value="2004">2004</option>
-                                                                        <option value="2003">2003</option>
-                                                                        <option value="2002">2002</option>
-                                                                        <option value="2001">2001</option>
-                                                                    </select>
+                                                                        <option name="year" value="2021">2021</option>
+                                                                        <option name="year" value="2020">2020</option>
+                                                                        <option name="year" value="2019">2019</option>
+                                                                        <option name="year" value="2018">2018</option>
+                                                                        <option name="year" value="2017">2017</option>
+                                                                        <option name="year" value="2016">2016</option>
+                                                                        <option name="year" value="2015">2015</option>
+                                                                        <option name="year" value="2014">2014</option>
+                                                                        <option name="year" value="2013">2013</option>
+                                                                        <option name="year" value="2012">2012</option>
+                                                                        <option name="year" value="2011">2011</option>
+                                                                        <option name="year" value="2010">2010</option>
+                                                                        <option name="year" value="2009">2009</option>
+                                                                        <option name="year" value="2008">2008</option>
+                                                                        <option name="year" value="2007">2007</option>
+                                                                        <option name="year" value="2006">2006</option>
+                                                                        <option name="year" value="2005">2005</option>
+                                                                        <option name="year" value="2004">2004</option>
+                                                                        <option name="year" value="2003">2003</option>
+                                                                        <option name="year" value="2002">2002</option>
+                                                                        <option name="year" value="2001">2001</option>
+                                                                    </select> 
                                                                 </div>
                                                             </div>
                                                             <p id="d_error"></p>
@@ -198,7 +209,7 @@
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
                                                                                 name="gender" id="inlineRadio1"
-                                                                                value="option1" required>
+                                                                                value="F" required>
                                                                             <label class="form-check-label"
                                                                                 for="inlineRadio1">Female</label>
                                                                         </div>
@@ -209,7 +220,7 @@
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
                                                                                 name="gender" id="inlineRadio2"
-                                                                                value="option2" required>
+                                                                                value="M" required>
                                                                             <label class="form-check-label"
                                                                                 for="inlineRadio2">Male</label>
                                                                         </div>
@@ -220,7 +231,7 @@
                                                                         <div class="form-check form-check-inline">
                                                                             <input class="form-check-input" type="radio"
                                                                                 name="gender" id="inlineRadio3"
-                                                                                value="option3" required>
+                                                                                value="C" required>
                                                                             <label class="form-check-label"
                                                                                 for="inlineRadio3">Custom
                                                                             </label>
@@ -261,7 +272,7 @@
 
                                                                 <input type="text" class="form-control"
                                                                     id="formGroupExampleInput2"
-                                                                    placeholder="Gender Optional">
+                                                                    placeholder="Gender Optional" name="optional">
                                                             </div>
                                                             <div class="form-check">
 
@@ -285,28 +296,13 @@
 
                                                             <div class="text-center my-2"> <button type="submit"
                                                                     class="btn btn-success px-5 font-weight-bold"
-                                                                    onclick="validate();" value="Submit">Sign
+                                                                    onclick="validate();" value="Submit" name="create">Sign
                                                                     Up</button></div>
                                                     </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        </section>
+        
+        
     </div>
-
     <script>
         function validate() {
 
@@ -401,14 +397,14 @@
     </script>
 
     <script src=" https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+                        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                        crossorigin="anonymous"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                            crossorigin="anonymous"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                            crossorigin="anonymous"></script>
 </body>
 
 </html>
